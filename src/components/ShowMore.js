@@ -1,10 +1,10 @@
 import React from "react";
 
-const ShowMore = () => {
+const ShowMore = ({ callback }) => {
     return (
-        <button>
+        <button className='font-bold text-white bg-black' onClick={callback}>
             Show More
-        </button>
+        </button >
     )
 }
 

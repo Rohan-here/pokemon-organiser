@@ -10,20 +10,20 @@ import { useHomeFetch } from "../hooks/getPokemonPage";
 
 
 const Home = () => {
-    const { state, loading, error } = useHomeFetch();
+    const { state, loading, error, setIsLoadingMore } = useHomeFetch();
     console.log(state);
     return (
         <>
             {
                 state.pokemons.map(element => (
-                    <img alt={defaultImg} src={element.sprites.back_default}>
+                    <img alt={defaultImg} src={element.sprites.front_default}>
 
                     </img>
                 ))
             }
 
             {loading && <Loading />}
-            <ShowMore></ShowMore>
+            {state.pokemons.length <= 1118 && <ShowMore callback={() => setIsLoadingMore(true)} />}
         </>
     )
 }

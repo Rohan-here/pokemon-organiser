@@ -1,6 +1,8 @@
+/* eslint-disable no-undef */
 import { useState, useEffect } from "react";
 import { getPage } from "../Utility/getPage";
 import { getPokemon } from '../Utility/getPokemon'
+import { useCallback } from "react";
 const initialState = {
     pokemons: [],
 }
@@ -10,8 +12,9 @@ export const useHomeFetch = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [next, setNext] = useState(null);
-
-    const fetchPokemons = async () => {
+    const [isLoadingMore, setIsLoadingMore] = useState(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const fetchPokemons = useCallback(async () => {
         try {
             setLoading(true);
             setError(false);
@@ -30,11 +33,20 @@ export const useHomeFetch = () => {
             setError(true);
         }
         setLoading(false);
-    }
+    })
 
     useEffect(() => {
         console.log('UwU');
+        console.log(next);
         fetchPokemons();
+
     }, [])
-    return { state, loading, error };
+
+    useEffect(() => {
+        if (!isLoadingMore) return;
+
+        fetchPokemons();
+        setIsLoadingMore(false);
+    }, [fetchPokemons, isLoadingMore, state.pokemons])
+    return { state, loading, next, error, setIsLoadingMore };
 }
