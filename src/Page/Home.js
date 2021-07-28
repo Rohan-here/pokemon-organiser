@@ -1,9 +1,9 @@
 import React from "react";
-
+import defaultImg from '../Utility/defaultImg.jpg'
 //components
-import Header from "../components/Header";
-import Loading from "../components/Spinner";
 
+import Loading from "../components/Spinner";
+import ShowMore from "../components/ShowMore";
 
 //hooks
 import { useHomeFetch } from "../hooks/getPokemonPage";
@@ -16,13 +16,14 @@ const Home = () => {
         <>
             {
                 state.pokemons.map(element => (
-                    <div>
-                        {element.name}
-                    </div>
+                    <img alt={defaultImg} src={element.sprites.back_default}>
+
+                    </img>
                 ))
             }
 
             {loading && <Loading />}
+            <ShowMore></ShowMore>
         </>
     )
 }

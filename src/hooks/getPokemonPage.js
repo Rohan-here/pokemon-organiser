@@ -17,12 +17,14 @@ export const useHomeFetch = () => {
             setError(false);
             const pokemonNext = await getPage(next);
             const { results, previous } = pokemonNext;
-            console.log(results);
-            console.log(pokemonNext.next);
+            const pokemonData = [];
+            for (let pokeData of results) {
+                const temp = await getPokemon(pokeData.name);
+                pokemonData.push(temp);
+            }
             setNext(pokemonNext.next);
             setState(prev => ({
-                ...results,
-                pokemons: previous == null ? [...results] : [...prev.pokemons, ...results]
+                pokemons: previous == null ? [...pokemonData] : [...prev.pokemons, ...pokemonData]
             }))
         } catch (error) {
             setError(true);
