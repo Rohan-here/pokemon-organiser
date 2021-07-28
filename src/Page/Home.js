@@ -16,14 +16,18 @@ const Home = () => {
         <>
             {
                 state.pokemons.map(element => (
-                    <img alt={defaultImg} src={element.sprites.front_default}>
-
-                    </img>
+                    <>
+                        <img alt={defaultImg} src={element.sprites.front_default}>
+                        </img>
+                        <div>
+                            {element.name + ' ' + element.id};
+                        </div>
+                    </>
                 ))
             }
 
             {loading && <Loading />}
-            {state.pokemons.length <= 1118 && <ShowMore callback={() => setIsLoadingMore(true)} />}
+            {state.pokemons.length !== 1118 && <ShowMore callback={() => setIsLoadingMore(true)} />}
         </>
     )
 }
