@@ -36,10 +36,8 @@ export const useHomeFetch = () => {
     })
 
     useEffect(() => {
-        console.log('UwU');
-        console.log(next);
         fetchPokemons();
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {

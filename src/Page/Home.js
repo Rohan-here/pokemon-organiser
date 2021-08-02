@@ -1,33 +1,34 @@
 import React from "react";
-import defaultImg from '../Utility/defaultImg.jpg'
+// import defaultImg from '../Utility/defaultImg.jpg';
 //components
 
 import Loading from "../components/Spinner";
 import ShowMore from "../components/ShowMore";
-
+import Wrapper from "../components/Wrapper";
+import PokemonThumb from '../components/PokemonThumb';
 //hooks
 import { useHomeFetch } from "../hooks/getPokemonPage";
 
 
 const Home = () => {
     const { state, loading, error, setIsLoadingMore } = useHomeFetch();
-    console.log(state);
+
+    if (error) {
+        return (
+            <div>
+                AN ERROR OCCURED :(
+            </div>
+        )
+    }
     return (
         <>
-            {
-                state.pokemons.map(element => (
-                    <>
-                        <img alt={defaultImg} src={element.sprites.front_default}>
-                        </img>
-                        <div>
-                            {element.name + ' ' + element.id};
-                        </div>
-                    </>
-                ))
-            }
+            <Wrapper child={state.pokemons.map(element => (
+                <PokemonThumb pokemon={element} key={element.id} />
+            ))} />
+
 
             {loading && <Loading />}
-            {state.pokemons.length !== 1118 && <ShowMore callback={() => setIsLoadingMore(true)} />}
+            {state.pokemons.length < 802 && !loading && <ShowMore callback={() => setIsLoadingMore(true)} />}
         </>
     )
 }
