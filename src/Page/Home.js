@@ -6,6 +6,8 @@ import Loading from "../components/Spinner";
 import ShowMore from "../components/ShowMore";
 import Wrapper from "../components/Wrapper";
 import PokemonThumb from '../components/PokemonThumb';
+import Footer from "../components/Footer";
+
 //hooks
 import { useHomeFetch } from "../hooks/getPokemonPage";
 
@@ -22,13 +24,14 @@ const Home = () => {
     }
     return (
         <>
-            <Wrapper child={state.pokemons.map(element => (
+            <Wrapper className="m-4" child={state.pokemons.map(element => (
                 <PokemonThumb pokemon={element} key={element.id} />
             ))} />
 
 
             {loading && <Loading />}
             {state.pokemons.length < 802 && !loading && <ShowMore callback={() => setIsLoadingMore(true)} />}
+            {!loading && <Footer />}
         </>
     )
 }

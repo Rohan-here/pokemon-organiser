@@ -1,6 +1,18 @@
 module.exports = {
   theme: {
     extend: {
+      screens: {
+        'tablet': { 'max': '1500px' },
+        'mobile': { 'max': '1030px' },
+        'mini': { 'max': "400px" }
+      },
+      width: {
+        thumbSize: '30rem',
+        mobileSize: '25rem'
+      },
+      maxWidth: {
+        thumbSize: '30rem'
+      },
       colors: {
         fire: '#ff8a1c',
         normal: '#a3a189',
