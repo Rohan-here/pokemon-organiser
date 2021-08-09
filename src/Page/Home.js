@@ -29,6 +29,17 @@ const Home = () => {
 
     const { state, loading, error, setIsLoadingMore } = useHomeFetch();
 
+    const removeSelected = ele => {
+        console.log(ele)
+        const index = selected.pokemons.indexOf(ele)
+        console.log(index)
+        if (index > -1)
+            setSelected(
+                selected.pokemons.splice(index, 1)
+            )
+    }
+
+
     if (error) {
         return (
             <div>
@@ -38,7 +49,7 @@ const Home = () => {
     }
     return (
         <>
-            <SelectBar selected={selected} setSelected={setSelected} />
+            <SelectBar selected={selected} remove={removeSelected} />
 
             <Wrapper className="m-4" child={state.pokemons.map(element => (
                 <PokemonThumb pokemon={element} key={element.id}
