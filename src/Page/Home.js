@@ -38,7 +38,7 @@ const Home = () => {
     }
     return (
         <>
-            <SelectBar selected={selected} />
+            <SelectBar selected={selected} setSelected={setSelected} />
 
             <Wrapper className="m-4" child={state.pokemons.map(element => (
                 <PokemonThumb pokemon={element} key={element.id}
